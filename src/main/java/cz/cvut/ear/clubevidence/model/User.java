@@ -1,6 +1,7 @@
 package cz.cvut.ear.clubevidence.model;
 
 import jakarta.persistence.*;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
@@ -30,11 +31,11 @@ public abstract class User extends AbstractEntity{
     @Column(name = "role")
     private Role role;
 
-    public String getFirstname() {
+    public String getFirstName() {
         return firstname;
     }
 
-    public void setFirstname(String firstname) {
+    public void setFirstName(String firstname) {
         this.firstname = firstname;
     }
 
@@ -76,6 +77,13 @@ public abstract class User extends AbstractEntity{
 
     public void setPassword(String password) {
         this.password = password;
+    }
+    public void encodePassword(PasswordEncoder encoder) {
+        this.password = encoder.encode(password);
+    }
+
+    public void erasePassword() {
+        this.password = null;
     }
 
     public Role getRole() {
