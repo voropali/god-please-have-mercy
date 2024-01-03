@@ -1,6 +1,8 @@
 package cz.cvut.ear.clubevidence.rest.handler;
 
 
+import cz.cvut.ear.clubevidence.exception.ValidationException;
+import cz.cvut.ear.clubevidence.security.SecurityUtils;
 import jakarta.persistence.PersistenceException;
 import jakarta.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
@@ -29,5 +31,27 @@ public class RestExceptionHandler {
 
     private static ErrorInfo errorInfo(HttpServletRequest request, Throwable e) {
         return new ErrorInfo(e.getMessage(), request.getRequestURI());
+    }
+
+    @ExceptionHandler(PersistenceException.class)
+    public ResponseEntity<ErrorInfo> persistenceException(HttpServletRequest request, PersistenceException e) {
+        logException(e);
+        return new ResponseEntity<>(errorInfo(request, e.getCause()), HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+    @ExceptionHandler(ValidationException.class)
+    public ResponseEntity<ErrorInfo> validation(HttpServletRequest request, ValidationException e) {
+        logException(e);
+        return new ResponseEntity<>(errorInfo(request, e), HttpStatus.CONFLICT);
+    }
+
+    @ExceptionHandler(AccessDeniedException.class)
+    public ResponseEntity<ErrorInfo> accessDenied(HttpServletRequest request, AccessDeniedException e) {
+        // Spring Boot throws Access Denied when trying to access a secured method with anonymous authentication token
+        // We want to let such exception out, so that it is handled by the authentication entry point (which returns 401)
+        if (SecurityUtils.isAuthenticatedAnonymously()) {
+            throw e;
+        }
+        logException(e);
+        return new ResponseEntity<>(errorInfo(request, e), HttpStatus.FORBIDDEN);
     }
 }

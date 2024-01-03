@@ -1,5 +1,6 @@
 package cz.cvut.ear.clubevidence.service;
 
+import cz.cvut.ear.clubevidence.model.PremiumUser;
 import cz.cvut.ear.clubevidence.model.RegularUser;
 import cz.cvut.ear.clubevidence.model.Role;
 import cz.cvut.ear.clubevidence.model.User;
@@ -48,10 +49,12 @@ public class SystemInitializer {
         if (userService.exists(ADMIN_USERNAME)) {
             return;
         }
-        final User admin = new RegularUser();
+        final User admin = new PremiumUser();
         admin.setUsername(ADMIN_USERNAME);
         admin.setFirstName("System");
         admin.setSurname("Administrator");
+        admin.setPhone("720110329");
+        admin.setUsername("sysadmin");
         admin.setPassword("adm1n");
         admin.setRole(Role.ADMIN);
         LOG.info("Generated admin user with credentials " + admin.getUsername() + "/" + admin.getPassword());
