@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 @Entity
+@Table(name = "Competition")
 public class Competition extends AbstractEntity{
     @Basic(optional = false)
     @Column(nullable = false)

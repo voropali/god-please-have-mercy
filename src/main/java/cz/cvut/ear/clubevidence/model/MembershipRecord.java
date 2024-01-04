@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import java.util.Date;
 
 @Entity
+@Table(name = "MembershipRecord")
 public class MembershipRecord extends AbstractEntity {
     @OneToOne
     @JoinColumn

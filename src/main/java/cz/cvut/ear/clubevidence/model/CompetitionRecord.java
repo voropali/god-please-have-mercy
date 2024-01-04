@@ -3,6 +3,7 @@ package cz.cvut.ear.clubevidence.model;
 import jakarta.persistence.*;
 
 @Entity
+@Table(name = "CompetitionRecord")
 public class CompetitionRecord extends AbstractEntity{
     @ManyToOne
     @JoinColumn(name = "member_id", nullable = false)

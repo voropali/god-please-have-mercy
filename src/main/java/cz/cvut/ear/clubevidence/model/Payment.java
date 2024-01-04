@@ -3,6 +3,7 @@ import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
 @Entity
+@Table(name = "Payment")
 @NamedQueries({
         @NamedQuery(name = "PaymentsRecord", query = "SELECT p FROM Payment p WHERE p.member = :username")})
 public class Payment extends AbstractEntity{

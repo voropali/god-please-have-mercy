@@ -2,13 +2,15 @@ package cz.cvut.ear.clubevidence.model;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 
 import java.util.List;
 
 @Entity
+@Table(name = "Club")
 public class Club extends AbstractEntity{
     private List<User> members;
-    private List <Trening> trenings;
+    private List <Training> trainings;
 
     private List<Competition> competitions;
 
@@ -22,12 +24,12 @@ public class Club extends AbstractEntity{
     }
 
     @OneToMany
-    public List<Trening> getTrenings() {
-        return trenings;
+    public List<Training> getTrenings() {
+        return trainings;
     }
 
-    public void setTrenings(List<Trening> trenings) {
-        this.trenings = trenings;
+    public void setTrenings(List<Training> trainings) {
+        this.trainings = trainings;
     }
 
     @OneToMany
