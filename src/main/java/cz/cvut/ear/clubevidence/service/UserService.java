@@ -4,6 +4,7 @@ import cz.cvut.ear.clubevidence.dao.CompetitionDao;
 import cz.cvut.ear.clubevidence.dao.CompetitionRecordDao;
 import cz.cvut.ear.clubevidence.dao.PaymentDao;
 import cz.cvut.ear.clubevidence.dao.UserDao;
+import cz.cvut.ear.clubevidence.exception.UserAlreadyExists;
 import cz.cvut.ear.clubevidence.model.*;
 import cz.cvut.ear.clubevidence.util.Constants;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,44 +41,38 @@ public class UserService {
         this.encoder = encoder;
     }
 
-    /**
-     * Find all page.
-     *
-     // * @param pageable the pageable
-     // * @param name     the name
-     * @return the page
-     */
-    @Transactional(readOnly = true)
-    public List<User> findAll() {
-        return userDao.findAll();
-    }
-
-    /**
-     * Find city.
-     * <p>
-     * //   * @param id the id
-     *
-     * @return the city
-     */
-    @Transactional(readOnly = true)
-    public Object find(Integer id) {
-        return userDao.find(id);
-    }
-
-    /**
-     * Persist.
-     *
-     //   * @param city the city
-     */
     @Transactional
     public void persist(User user) {
         Objects.requireNonNull(user);
+        if(userDao.existsByUsername(user.getUsername())){
+            throw UserAlreadyExists.create(user.getUsername());
+        }
         user.encodePassword(encoder);
         if (user.getRole() == null) {
             user.setRole(Constants.DEFAULT_ROLE);
         }
         userDao.persist(user);
     }
+
+    @Transactional(readOnly = true)
+    public Object findById(Integer id) {
+        Objects.requireNonNull(id);
+        return userDao.find(id);
+    }
+
+    @Transactional(readOnly = true)
+    public Object findByUsername(String username) {
+        Objects.requireNonNull(username);
+        return userDao.findByUsername(username);
+    }
+
+
+    @Transactional(readOnly = true)
+    public List<User> findAll() {
+        return userDao.findAll();
+    }
+
+
 
     @Transactional
     public void persistCompetition(User admin, Competition competition) {

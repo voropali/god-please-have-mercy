@@ -12,6 +12,7 @@ public class UserDao extends BaseDao{
     public UserDao(){
         super(User.class);
     }
+
     public User findByUsername(String username) {
         try {
             return em.createNamedQuery("User.findByUsername", User.class).setParameter("username", username)
@@ -28,4 +29,9 @@ public class UserDao extends BaseDao{
             return null;
         }
     }
+
+    public boolean existsByUsername(String username){
+        return username != null && em.find(type, username) != null;
+    }
+
 }

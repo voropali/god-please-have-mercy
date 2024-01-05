@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Objects;
 
 @Service
@@ -31,8 +32,12 @@ public class AlertService {
     }
 
     @Transactional
-    public void sendPaymentAlert(User reciever, String message){
+    public void sendSuccessfulPaymentAlert(User reciever, String message){
         persistAlert(reciever, "Successful Payment", message);
     }
 
+    @Transactional
+    public void sendUnsuccessfulPaymentAlert(User reciever, String message){
+        persistAlert(reciever, "Unsuccessful Payment", message);
+    }
 }

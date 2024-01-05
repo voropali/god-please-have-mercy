@@ -29,7 +29,7 @@ public class User extends AbstractEntity{
     @Column(nullable = false)
     private String password;
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
+    @Column
     private Role role;
 
     public String getFirstName() {
