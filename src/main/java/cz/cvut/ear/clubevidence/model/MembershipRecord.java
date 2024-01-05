@@ -7,7 +7,7 @@ import java.util.Date;
 @Table(name = "MembershipRecord")
 public class MembershipRecord extends AbstractEntity {
     @OneToOne
-    @JoinColumn
+    @JoinColumn(name = "member_id", nullable = false)
     private User member;
     @Basic(optional = false)
     @Column(nullable = false)

@@ -1,16 +1,18 @@
 package cz.cvut.ear.clubevidence.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "Alert")
 public class Alert extends AbstractEntity{
     @ManyToOne
+    @JoinColumn(name = "reciever_id", nullable = false)
     private User reciever;
+    @Basic(optional = false)
+    @Column(nullable = false)
     private String topic;
+    @Basic(optional = false)
+    @Column(nullable = false)
     private String message;
 
     public User getReciever() {

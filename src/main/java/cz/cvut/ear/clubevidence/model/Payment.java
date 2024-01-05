@@ -7,7 +7,8 @@ import java.time.LocalDateTime;
 @NamedQueries({
         @NamedQuery(name = "PaymentsRecord", query = "SELECT p FROM Payment p WHERE p.member = :username")})
 public class Payment extends AbstractEntity{
-    @Column
+    @Basic(optional = false)
+    @Column(nullable = false)
     private LocalDateTime paymentTime;
     @ManyToOne
     @JoinColumn(name = "admin_id", nullable = false)

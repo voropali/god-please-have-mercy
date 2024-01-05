@@ -11,11 +11,11 @@ public class CompetitionRecord extends AbstractEntity{
     @ManyToOne
     @JoinColumn(name = "competition_id",nullable = false)
     private Competition competition;
-    @Basic
-    @Column
+    @Basic(optional = false)
+    @Column(nullable = false)
     private int earnedPoints;
-    @Basic
-    @Column
+    @Basic(optional = false)
+    @Column(nullable = false)
     private int Place;
 
     public User getMember() {

@@ -1,8 +1,6 @@
 package cz.cvut.ear.clubevidence.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.ManyToMany;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 import java.time.DayOfWeek;
 import java.time.LocalTime;
@@ -11,10 +9,18 @@ import java.util.List;
 @Entity
 @Table(name = "Training")
 public class Training extends AbstractEntity{
+    @Basic(optional = false)
+    @Column(nullable = false)
     private LocalTime time;
+    @Basic(optional = false)
+    @Column(nullable = false)
     private DayOfWeek dayOfWeek;
+    @Basic(optional = false)
+    @Column(nullable = false)
     private String type;
     @ManyToMany
+    @OrderBy("username")
+    @JoinTable(name = "training_member")
     private List<User> members;
 
     public Training(LocalTime time, DayOfWeek dayOfWeek, String type){

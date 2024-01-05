@@ -17,7 +17,7 @@ public class Competition extends AbstractEntity{
     @Column(nullable = false)
     private String address;
     @ManyToMany
-    @OrderBy("surname")
+    @OrderBy("username")
     @JoinTable(name = "competition_participants")
     private List<User> participants;
 
