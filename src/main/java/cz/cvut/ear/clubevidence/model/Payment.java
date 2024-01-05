@@ -1,4 +1,5 @@
 package cz.cvut.ear.clubevidence.model;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
@@ -19,6 +20,9 @@ public class Payment extends AbstractEntity{
     @Basic(optional = false)
     @Column(nullable = false)
     private int sum;
+    @OneToOne
+    @JsonIgnore
+    private MembershipRecord record;
 
     public User getMember() {
         return member;

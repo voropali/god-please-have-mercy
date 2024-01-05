@@ -1,4 +1,5 @@
 package cz.cvut.ear.clubevidence.model;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.Date;
@@ -12,6 +13,9 @@ public class MembershipRecord extends AbstractEntity {
     @Basic(optional = false)
     @Column(nullable = false)
     private Date expireDate;
+    @JsonIgnore
+    @OneToOne
+    private Payment payment;
 
     public User getMember() {
         return member;
