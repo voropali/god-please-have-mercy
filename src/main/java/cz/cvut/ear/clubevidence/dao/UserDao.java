@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public class UserDao extends BaseDao{
+public class UserDao extends BaseDao<User>{
     public UserDao(){
         super(User.class);
     }
@@ -29,6 +29,7 @@ public class UserDao extends BaseDao{
             return null;
         }
     }
+
 
     public boolean existsByUsername(String username){
         return username != null && em.find(type, username) != null;

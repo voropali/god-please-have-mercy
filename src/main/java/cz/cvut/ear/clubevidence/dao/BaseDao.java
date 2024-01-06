@@ -1,5 +1,6 @@
 package cz.cvut.ear.clubevidence.dao;
 
+import cz.cvut.ear.clubevidence.exception.NotFoundException;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.PersistenceException;
@@ -22,7 +23,15 @@ public abstract class BaseDao<T> implements GenericDao<T>{
     @Override
     public T find(Integer id) {
         Objects.requireNonNull(id);
-        return em.find(type, id);
+        if (id < 0) {
+            throw new IllegalArgumentException("Invalid id. It must be a positive integer.");
+        }
+        T entity = em.find(type, id);
+
+        if (entity == null) {
+            throw NotFoundException.create("None thing w id:",  id + "wasnt found");
+        }
+        return entity;
     }
 
     @Override
