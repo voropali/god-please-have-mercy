@@ -1,4 +1,4 @@
-package cz.cvut.ear.clubevidence.rest.util;
+package cz.cvut.ear.clubevidence.rest;
 
 public class MembershipRecordController {
 }
