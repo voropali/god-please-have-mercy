@@ -4,6 +4,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/rest/membership_records")
-public class MembershipRecordController {
+@RequestMapping("/rest/competition_records")
+public class CompetitionRecordContoller {
 }
