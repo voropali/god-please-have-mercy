@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Entity
-@Table(name = "User")
+@Table(name = "app_user")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "USER_TYPE")
 @NamedQueries({
