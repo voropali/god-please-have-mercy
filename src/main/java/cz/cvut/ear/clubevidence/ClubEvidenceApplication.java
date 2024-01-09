@@ -6,11 +6,11 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-@OpenAPIDefinition(
-        info = @Info(
-                title = "Club Evidence"
-        )
-)
+//@OpenAPIDefinition(
+//        info = @Info(
+//                title = "Club Evidence"
+//        )
+//)
 public class ClubEvidenceApplication {
     public static void main(String[] args) {
         SpringApplication.run(ClubEvidenceApplication.class, args);
