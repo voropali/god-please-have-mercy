@@ -30,12 +30,6 @@ public class TrainingService {
     @Transactional
     public void persist(Training training) {
         Objects.requireNonNull(training);
-        trainingDao.persist(training);
-    }
-
-    @Transactional
-    public void saveTraining(Training training) {
-        Objects.requireNonNull(training);
         if(trainingDao.exists(training.getId())){
             throw new IllegalIdentifierException("Training with id: " + training.getId() + " already exists");
         }

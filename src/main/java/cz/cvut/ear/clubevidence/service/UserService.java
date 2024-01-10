@@ -76,7 +76,8 @@ public class UserService {
 
     @Transactional
     public void persistCompetition(User admin, Competition competition) {
-
+        Objects.requireNonNull(admin);
+        Objects.requireNonNull(competition);
         if(admin.getRole() == Role.ADMIN) {
             competitionDao.persist(competition);
         }
@@ -84,7 +85,8 @@ public class UserService {
 
     @Transactional
     public void persistCompetitionRecord(User admin, CompetitionRecord competitionRecord) {
-
+        Objects.requireNonNull(admin);
+        Objects.requireNonNull(competitionRecord);
         if(admin.getRole() == Role.ADMIN) {
             competitionRecordDao.persist(competitionRecord);
         }
@@ -97,12 +99,17 @@ public class UserService {
      */
     @Transactional
     public void updateUser(User admin, User member) {
-        userDao.update(member);
+        Objects.requireNonNull(admin);
+        Objects.requireNonNull(member);
+        if(admin.getRole() == Role.ADMIN) {
+            userDao.update(member);
+        }
     }
 
     @Transactional
     public void updateCompetition(User admin, Competition competition) {
-
+        Objects.requireNonNull(admin);
+        Objects.requireNonNull(competition);
         if(admin.getRole() == Role.ADMIN) {
             competitionDao.update(competition);
         }
@@ -110,19 +117,17 @@ public class UserService {
 
     @Transactional
     public void updateCompetitionRecord(User admin, CompetitionRecord competitionRecord) {
-
+        Objects.requireNonNull(admin);
+        Objects.requireNonNull(competitionRecord);
         if(admin.getRole() == Role.ADMIN) {
             competitionRecordDao.update(competitionRecord);
         }
     }
 
-    /**
-     * Remove.
-     *
-     //    * @param city the city
-     */
     @Transactional
     public void removeUser(User admin, User member) {
+        Objects.requireNonNull(admin);
+        Objects.requireNonNull(member);
         if(admin.getRole() == Role.ADMIN) {
             userDao.remove(member);
         }
@@ -130,6 +135,8 @@ public class UserService {
 
     @Transactional
     public void updatePayment(User admin, Payment payment) {
+        Objects.requireNonNull(admin);
+        Objects.requireNonNull(payment);
         if(admin.getRole() == Role.ADMIN) {
             paymentDao.update(payment);
         }
@@ -137,6 +144,8 @@ public class UserService {
 
     @Transactional
     public void persistPayment(User admin, Payment payment) {
+        Objects.requireNonNull(admin);
+        Objects.requireNonNull(payment);
         if(admin.getRole() == Role.ADMIN) {
             paymentDao.persist(payment);
         }
@@ -144,7 +153,8 @@ public class UserService {
 
     @Transactional
     public void removeCompetition(User admin, Competition competition) {
-
+        Objects.requireNonNull(admin);
+        Objects.requireNonNull(competition);
         if(admin.getRole() == Role.ADMIN) {
             competitionDao.remove(competition);
         }
@@ -152,7 +162,8 @@ public class UserService {
 
     @Transactional
     public void removeCompetitionRecord(User admin, CompetitionRecord competitionRecord) {
-
+        Objects.requireNonNull(admin);
+        Objects.requireNonNull(competitionRecord);
         if(admin.getRole() == Role.ADMIN) {
             competitionRecordDao.remove(competitionRecord);
         }
@@ -160,6 +171,8 @@ public class UserService {
 
     @Transactional
     public void registerForCompetition(User member, Competition competition) {
+        Objects.requireNonNull(member);
+        Objects.requireNonNull(member);
         competitionService.registerUserForCompetition(member, competition);
     }
 
