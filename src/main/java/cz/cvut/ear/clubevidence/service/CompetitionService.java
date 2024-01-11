@@ -100,4 +100,6 @@ public class CompetitionService {
 
         competitionDao.update(competition);
     }
+
+
 }

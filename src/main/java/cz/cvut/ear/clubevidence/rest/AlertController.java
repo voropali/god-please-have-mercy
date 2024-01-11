@@ -3,6 +3,8 @@ package cz.cvut.ear.clubevidence.rest;
 import cz.cvut.ear.clubevidence.model.Alert;
 import cz.cvut.ear.clubevidence.service.AlertService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -14,4 +16,5 @@ public class AlertController {
     public AlertController(AlertService alertService){
         this.alertService = alertService;
     }
+
 }
