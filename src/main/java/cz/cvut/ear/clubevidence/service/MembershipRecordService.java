@@ -36,42 +36,25 @@ public class MembershipRecordService {
         return membershipRecordDao.findAll();
     }
 
-    /**
-     * Find city.
-     *
-     * @param id the id
-     * @return the city
-     */
+
     @Transactional(readOnly = true)
     public MembershipRecord find(Integer id) {
         return membershipRecordDao.find(id);
     }
 
-    /**
-     * Persist.
-     *
-     //   * @param city the city
-     */
+
     @Transactional
     public void persist(MembershipRecord membershipRecord) {
         membershipRecordDao.persist(membershipRecord);
     }
 
-    /**
-     * Update.
-     *
-     //   * @param city the city
-     */
+
     @Transactional
     public void update(MembershipRecord membershipRecord) {
         membershipRecordDao.update(membershipRecord);
     }
 
-    /**
-     * Remove.
-     *
-     //    * @param city the city
-     */
+
     @Transactional
     public void remove(MembershipRecord membershipRecord) {
         membershipRecordDao.remove(membershipRecord);

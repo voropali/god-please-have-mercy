@@ -28,11 +28,7 @@ public class UserController {
         this.userService = userService;
     }
 
-    /**
-     * Registers a new user.
-     *
-     * @param user User data
-     */
+
     @PreAuthorize("(!#user.isAdmin() && anonymous) || hasRole('ROLE_ADMIN')")
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Void> register(@RequestBody User user) {

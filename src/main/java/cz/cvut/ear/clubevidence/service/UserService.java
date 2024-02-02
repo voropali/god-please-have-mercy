@@ -24,11 +24,7 @@ public class UserService {
     private  final CompetitionService competitionService;
     private final PasswordEncoder encoder;
 
-    /**
-     * Instantiates a new City service.
-     *
-     //* @param competitionDao the city dao
-     */
+
     @Autowired
     public UserService(UserDao userDao, PaymentDao paymentDao, CompetitionDao competitionDao, CompetitionRecordDao competitionRecordDao, CompetitionService competitionService, PasswordEncoder encoder) {
 
@@ -92,11 +88,7 @@ public class UserService {
         }
     }
 
-    /**
-     * Update.
-     *
-     //   * @param city the city
-     */
+
     @Transactional
     public void updateUser(User admin, User member) {
         Objects.requireNonNull(admin);
