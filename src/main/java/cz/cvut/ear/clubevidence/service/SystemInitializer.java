@@ -1,7 +1,7 @@
 //package cz.cvut.ear.clubevidence.service;
 //
 //
-//import cz.cvut.ear.clubevidence.model.Role;
+//import cz.cvut.ear.clubevidence.model.enums.Role;
 //import cz.cvut.ear.clubevidence.model.User;
 //import jakarta.annotation.PostConstruct;
 //import org.slf4j.Logger;

@@ -1,4 +1,5 @@
 package cz.cvut.ear.clubevidence.model;
+import cz.cvut.ear.clubevidence.model.enums.Status;
 import jakarta.persistence.*;
 
 import java.util.Date;
@@ -16,6 +17,14 @@ public class Competition extends AbstractEntity{
     @Basic(optional = false)
     @Column(nullable = false)
     private String address;
+    @Basic(optional = false)
+    @Column(nullable = false)
+    private int registeredParticipants;
+
+    @Enumerated(EnumType.STRING)
+    @Column
+    private Status status;
+
     @ManyToMany
     @OrderBy("username")
     @JoinTable(name = "competition_participants")
@@ -43,6 +52,22 @@ public class Competition extends AbstractEntity{
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public int getRegisteredParticipants() {
+        return registeredParticipants;
+    }
+
+    public void setRegisteredParticipants(int registeredParticipants) {
+        this.registeredParticipants = registeredParticipants;
+    }
+
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
     }
 
     public List<User> getParticipants() {

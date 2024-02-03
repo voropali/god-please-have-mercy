@@ -1,11 +1,19 @@
 package cz.cvut.ear.clubevidence.model;
 
+import cz.cvut.ear.clubevidence.model.enums.Status;
 import jakarta.persistence.*;
 
 import java.time.DayOfWeek;
 import java.time.LocalTime;
 import java.util.List;
 
+@NamedQueries({
+        @NamedQuery(
+                name = "Training.findAllAvailable",
+                query = "SELECT tr FROM Training tr WHERE tr.status = 'Available'"
+        )
+
+})
 @Entity
 @Table(name = "Training")
 public class Training extends AbstractEntity{
@@ -18,6 +26,13 @@ public class Training extends AbstractEntity{
     @Basic(optional = false)
     @Column(nullable = false)
     private String type;
+    @Basic(optional = false)
+    @Column(nullable = false)
+    private int registeredMembers;
+
+    @Enumerated(EnumType.STRING)
+    @Column
+    private Status status;
     @ManyToMany
     @OrderBy("username")
     @JoinTable(name = "training_member")
@@ -55,6 +70,22 @@ public class Training extends AbstractEntity{
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public int getRegisteredMembers() {
+        return registeredMembers;
+    }
+
+    public void setRegisteredMembers(int registeredMembers) {
+        this.registeredMembers = registeredMembers;
+    }
+
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
     }
 
     public List<User> getMembers() {

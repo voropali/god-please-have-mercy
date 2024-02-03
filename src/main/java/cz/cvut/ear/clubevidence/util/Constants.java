@@ -1,6 +1,6 @@
 package cz.cvut.ear.clubevidence.util;
 
-import cz.cvut.ear.clubevidence.model.Role;
+import cz.cvut.ear.clubevidence.model.enums.Role;
 
 public final class Constants {
 

@@ -1,7 +1,13 @@
 package cz.cvut.ear.clubevidence.model;
 
 import jakarta.persistence.*;
+@NamedQueries({
+        @NamedQuery(
+                name = "Alert.findPersonsAllAllerts",
+                query = "SELECT al FROM Alert al WHERE al.reciever.id = :membersId"
+        )
 
+})
 @Entity
 @Table(name = "Alert")
 public class Alert extends AbstractEntity{

@@ -4,6 +4,7 @@ import cz.cvut.ear.clubevidence.dao.TrainingDao;
 import cz.cvut.ear.clubevidence.dao.UserDao;
 import cz.cvut.ear.clubevidence.exception.ExceptionGeneral;
 import cz.cvut.ear.clubevidence.exception.NotFoundException;
+import cz.cvut.ear.clubevidence.model.Club;
 import cz.cvut.ear.clubevidence.model.Training;
 import cz.cvut.ear.clubevidence.model.User;
 import org.hibernate.boot.model.naming.IllegalIdentifierException;
@@ -45,6 +46,13 @@ public class TrainingService {
         }
         return trainingDao.find(id);
     }
+
+    @Transactional(readOnly = true)
+    public List<Training> findAllAvailable(){
+        return trainingDao.findAllAvailable();
+    }
+
+
     @Transactional
     public void update(Training training) {
         Objects.requireNonNull(training);

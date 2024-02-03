@@ -6,6 +6,7 @@ import cz.cvut.ear.clubevidence.dao.PaymentDao;
 import cz.cvut.ear.clubevidence.dao.UserDao;
 import cz.cvut.ear.clubevidence.exception.UserAlreadyExists;
 import cz.cvut.ear.clubevidence.model.*;
+import cz.cvut.ear.clubevidence.model.enums.Role;
 import cz.cvut.ear.clubevidence.util.Constants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;

@@ -1,5 +1,6 @@
 package cz.cvut.ear.clubevidence.model;
 
+import cz.cvut.ear.clubevidence.model.enums.Role;
 import jakarta.persistence.*;
 import org.springframework.security.crypto.password.PasswordEncoder;
 

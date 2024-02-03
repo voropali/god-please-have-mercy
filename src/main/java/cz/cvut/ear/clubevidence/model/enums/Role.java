@@ -1,4 +1,4 @@
-package cz.cvut.ear.clubevidence.model;
+package cz.cvut.ear.clubevidence.model.enums;
 
 public enum Role {
     ADMIN("ROLE_ADMIN"),
