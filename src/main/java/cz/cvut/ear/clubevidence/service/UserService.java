@@ -51,14 +51,20 @@ public class UserService {
         userDao.persist(user);
     }
 
+    @Transactional
+    public void setRole(User user, Role role) {
+        user.setRole(role);
+        userDao.update(user);
+    }
+
     @Transactional(readOnly = true)
-    public Object findById(Integer id) {
+    public User findById(Integer id) {
         Objects.requireNonNull(id);
         return userDao.find(id);
     }
 
     @Transactional(readOnly = true)
-    public Object findByUsername(String username) {
+    public User findByUsername(String username) {
         Objects.requireNonNull(username);
         return userDao.findByUsername(username);
     }

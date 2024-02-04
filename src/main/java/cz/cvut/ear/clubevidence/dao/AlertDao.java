@@ -15,7 +15,8 @@ public class AlertDao extends BaseDao<Alert>{
     public List <Alert> findPersonsAllAllerts(Integer membersId){
         return em.createNamedQuery("Alert.findPersonsAllAllerts", Alert.class).setParameter("membersId", membersId).getResultList();
     }
-    public List<Training> findAllAvailable(){
-        return em.createNamedQuery("Training.findAllAvailable", Training.class).setParameter("status", "Avialable").getResultList();
+
+    public List<Alert> findByTopic(String topicName){
+        return em.createNamedQuery("Alert.findByTopic", Alert.class).setParameter("topic", topicName).getResultList();
     }
 }

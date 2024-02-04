@@ -1,6 +1,7 @@
 package cz.cvut.ear.clubevidence.rest;
 
 import cz.cvut.ear.clubevidence.model.User;
+import cz.cvut.ear.clubevidence.model.enums.Role;
 import cz.cvut.ear.clubevidence.rest.util.RestUtils;
 import cz.cvut.ear.clubevidence.security.model.UserDetails;
 import cz.cvut.ear.clubevidence.service.UserService;
@@ -29,11 +30,21 @@ public class UserController {
     }
 
 
-    @PreAuthorize("(!#user.isAdmin() && anonymous) || hasRole('ROLE_ADMIN')")
-    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Void> register(@RequestBody User user) {
-        userService.persist(user);
-        LOG.debug("User {} successfully registered.", user);
+//    @PreAuthorize("(!#user.isAdmin() && anonymous) || hasRole('ROLE_ADMIN')")
+//    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+//    public ResponseEntity<Void> register(@RequestBody User user) {
+//        userService.persist(user);
+//        LOG.debug("User {} successfully registered.", user);
+//        final HttpHeaders headers = RestUtils.createLocationHeaderFromCurrentUri("/current");
+//        return new ResponseEntity<>(headers, HttpStatus.CREATED);
+//    }
+
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PostMapping(value ="/members", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Void> registerMember(@RequestBody User newMember) {
+        userService.persist(newMember);
+        userService.setRole(userService.findById(newMember.getId()), Role.USER);
+        LOG.debug("Student {} successfully registered.", newMember.getUsername());
         final HttpHeaders headers = RestUtils.createLocationHeaderFromCurrentUri("/current");
         return new ResponseEntity<>(headers, HttpStatus.CREATED);
     }

@@ -5,8 +5,11 @@ import jakarta.persistence.*;
         @NamedQuery(
                 name = "Alert.findPersonsAllAllerts",
                 query = "SELECT al FROM Alert al WHERE al.reciever.id = :membersId"
+        ),
+        @NamedQuery(
+                name = "Alert.findByTopic",
+                query = "SELECT al FROM Alert al WHERE al.topic = :topic"
         )
-
 })
 @Entity
 @Table(name = "Alert")
