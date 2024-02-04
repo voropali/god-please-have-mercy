@@ -5,6 +5,7 @@ import cz.cvut.ear.clubevidence.dao.UserDao;
 import cz.cvut.ear.clubevidence.exception.NotFoundException;
 import cz.cvut.ear.clubevidence.model.Competition;
 import cz.cvut.ear.clubevidence.model.User;
+import cz.cvut.ear.clubevidence.model.enums.Role;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -12,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.List;
+import java.util.Objects;
 
 @Service
 public class CompetitionService {
@@ -72,6 +74,15 @@ public class CompetitionService {
         competition.getParticipants().add(member);
 
         competitionDao.update(competition);
+    }
+
+    @Transactional
+    public void persistCompetition(User admin, Competition competition) {
+        Objects.requireNonNull(admin);
+        Objects.requireNonNull(competition);
+        if(admin.getRole() == Role.ADMIN) {
+            competitionDao.persist(competition);
+        }
     }
 
 

@@ -20,12 +20,12 @@ public class CompetitionController {
         this.competitionService = competitionService;
     }
 
-    @GetMapping
+    @GetMapping("/competitions/{id}")
     public Competition findCompetition(@PathVariable Integer id){
         return competitionService.getCompetitionById(id);
     }
 
-    @GetMapping
+    @GetMapping("/competitions")
     public List<Competition> findAll(){
         return competitionService.getAllCompetitions();
     }

@@ -76,26 +76,6 @@ public class UserService {
     }
 
 
-
-    @Transactional
-    public void persistCompetition(User admin, Competition competition) {
-        Objects.requireNonNull(admin);
-        Objects.requireNonNull(competition);
-        if(admin.getRole() == Role.ADMIN) {
-            competitionDao.persist(competition);
-        }
-    }
-
-    @Transactional
-    public void persistCompetitionRecord(User admin, CompetitionRecord competitionRecord) {
-        Objects.requireNonNull(admin);
-        Objects.requireNonNull(competitionRecord);
-        if(admin.getRole() == Role.ADMIN) {
-            competitionRecordDao.persist(competitionRecord);
-        }
-    }
-
-
     @Transactional
     public void updateUser(User admin, User member) {
         Objects.requireNonNull(admin);

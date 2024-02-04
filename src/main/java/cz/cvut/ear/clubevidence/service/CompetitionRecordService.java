@@ -4,6 +4,8 @@ import cz.cvut.ear.clubevidence.dao.CompetitionRecordDao;
 import cz.cvut.ear.clubevidence.exception.ExceptionGeneral;
 import cz.cvut.ear.clubevidence.exception.NotFoundException;
 import cz.cvut.ear.clubevidence.model.CompetitionRecord;
+import cz.cvut.ear.clubevidence.model.User;
+import cz.cvut.ear.clubevidence.model.enums.Role;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -40,9 +42,8 @@ public class CompetitionRecordService {
         return competitionRecordDao.find(id);
     }
 
-
     @Transactional
-    public void createCompetitionRecord(CompetitionRecord competitionRecord) {
+    public void persistCompetitionRecord(CompetitionRecord competitionRecord) {
         Objects.requireNonNull(competitionRecord);
         if(competitionRecordDao.exists(competitionRecord.getId())){
             throw new ExceptionGeneral("Competition record already exists");
