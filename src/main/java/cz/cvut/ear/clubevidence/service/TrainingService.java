@@ -1,5 +1,6 @@
 package cz.cvut.ear.clubevidence.service;
 
+import cz.cvut.ear.clubevidence.dao.ClubDao;
 import cz.cvut.ear.clubevidence.dao.TrainingDao;
 import cz.cvut.ear.clubevidence.dao.UserDao;
 import cz.cvut.ear.clubevidence.exception.ExceptionGeneral;
@@ -19,18 +20,26 @@ import java.util.Objects;
 public class TrainingService {
     private final TrainingDao trainingDao;
     private final UserDao userDao;
+    private final ClubDao clubDao;
     @Autowired
-    public TrainingService(TrainingDao trainingDao, UserDao userDao) {
+    public TrainingService(TrainingDao trainingDao, UserDao userDao, ClubDao clubDao) {
         this.trainingDao = trainingDao;
         this.userDao = userDao;
+        this.clubDao = clubDao;
     }
     @Transactional
-    public void persist(Training training) {
+    public void persist(Club club, Training training) {
         Objects.requireNonNull(training);
-        if(trainingDao.exists(training.getId())){
+        Objects.requireNonNull(club);
+        if (trainingDao.exists(training.getId())) {
             throw new IllegalIdentifierException("Training with id: " + training.getId() + " already exists");
         }
-        trainingDao.persist(training);
+        if (clubDao.exists(club.getId())) {
+            training.setClub(club);
+            trainingDao.persist(training);
+        } else {
+            throw new NotFoundException("Club not found");
+        }
     }
 
     @Transactional(readOnly = true)
@@ -62,6 +71,20 @@ public class TrainingService {
         trainingDao.update(training);
     }
 
+    @Transactional
+    public void addTrainingToClub(Integer clubId, Training training){
+        Objects.requireNonNull(clubId);
+        Objects.requireNonNull(training);
+
+        Club club = clubDao.find(clubId);
+
+        if (club != null) {
+            training.setClub(club);
+            trainingDao.persist(training);
+        } else {
+            throw new NotFoundException("Club not found");
+        }
+    }
 
     @Transactional
     public void remove(Training training) {

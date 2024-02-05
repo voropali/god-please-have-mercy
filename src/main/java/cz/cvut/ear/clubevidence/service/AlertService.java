@@ -33,11 +33,8 @@ public class AlertService {
 
     @Transactional
     public void sendSuccessfulPaymentAlert(User reciever, String message){
+        Objects.requireNonNull(reciever);
+        Objects.requireNonNull(message);
         persistAlert(reciever, "Successful Payment", message);
-    }
-
-    @Transactional
-    public void sendUnsuccessfulPaymentAlert(User reciever, String message){
-        persistAlert(reciever, "Unsuccessful Payment", message);
     }
 }

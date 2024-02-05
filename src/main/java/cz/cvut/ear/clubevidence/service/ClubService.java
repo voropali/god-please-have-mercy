@@ -43,5 +43,14 @@ public class ClubService {
         return clubDao.findAll();
     }
 
+    @Transactional
+    public void addClub(String name, String address){
+        Objects.requireNonNull(name);
+        Objects.requireNonNull(address);
+        final Club newClub = new Club();
+        newClub.setName(name);
+        newClub.setAddress(address);
 
+        clubDao.persist(newClub);
+    }
 }

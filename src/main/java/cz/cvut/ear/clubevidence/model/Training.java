@@ -17,6 +17,9 @@ import java.util.List;
 @Entity
 @Table(name = "Training")
 public class Training extends AbstractEntity{
+    @ManyToOne
+    @OrderBy()
+    private Club club;
     @Basic(optional = false)
     @Column(nullable = false)
     private LocalTime time;
@@ -38,14 +41,24 @@ public class Training extends AbstractEntity{
     @JoinTable(name = "training_member")
     private List<User> members;
 
-    public Training(LocalTime time, DayOfWeek dayOfWeek, String type){
+    public Training(Club club, LocalTime time, DayOfWeek dayOfWeek, String type, Status status){
+        this.club=club;
         this.time=time;
         this.dayOfWeek=dayOfWeek;
         this.type=type;
+        this.status= Status.Available;
     }
 
     public Training() {
 
+    }
+
+    public Club getClub() {
+        return club;
+    }
+
+    public void setClub(Club club) {
+        this.club = club;
     }
 
     public LocalTime getTime() {
