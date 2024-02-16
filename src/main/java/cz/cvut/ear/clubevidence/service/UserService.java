@@ -45,9 +45,9 @@ public class UserService {
             throw UserAlreadyExists.create(user.getUsername());
         }
         user.encodePassword(encoder);
-        if (user.getRole() == null) {
-            user.setRole(Constants.DEFAULT_ROLE);
-        }
+        //if (user.getRole() == null) {
+        //    user.setRole(Role.USER);
+        //}
         userDao.persist(user);
     }
 

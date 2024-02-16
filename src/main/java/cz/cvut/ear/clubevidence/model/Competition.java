@@ -8,6 +8,9 @@ import java.util.List;
 @Entity
 @Table(name = "Competition")
 public class Competition extends AbstractEntity{
+    @ManyToOne
+    @JoinColumn(name = "club_id", nullable = false)
+    private Club club;
     @Basic(optional = false)
     @Column(nullable = false)
     private String name;
@@ -25,7 +28,7 @@ public class Competition extends AbstractEntity{
     @Column
     private Status status;
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.REMOVE)
     @OrderBy("username")
     @JoinTable(name = "competition_participants")
     private List<User> participants;

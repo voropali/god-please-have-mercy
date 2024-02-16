@@ -11,23 +11,23 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @NamedQueries({
         @NamedQuery(name = "User.findByUsername", query = "SELECT u FROM User u WHERE u.username = :username"),})
 public class User extends AbstractEntity{
-    @Basic(optional = false)
-    @Column(nullable = false)
+    //@Basic(optional = false)
+    @Column(name="firstname",nullable = false)
     private String firstname;
     @Basic(optional = false)
-    @Column(nullable = false)
+    @Column(name="surname",nullable = false)
     private String surname;
     @Basic(optional = false)
-    @Column(nullable = false)
+    @Column(name="address",nullable = false)
     private String address;
     @Basic(optional = false)
-    @Column(nullable = false)
+    @Column(name="phone",nullable = false)
     private String phone;
     @Basic(optional = false)
-    @Column(nullable = false, unique = true)
+    @Column(name="username",nullable = false, unique = true)
     private String username;
     @Basic(optional = false)
-    @Column(nullable = false)
+    @Column(name="password",nullable = false)
     private String password;
     @Enumerated(EnumType.STRING)
     @Column

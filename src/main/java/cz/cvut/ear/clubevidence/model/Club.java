@@ -18,12 +18,12 @@ public class Club extends AbstractEntity{
     @JoinTable(name = "club_member")
     private List<User> members;
 
-    @OneToMany
-    @JoinColumn(name = "training_id", nullable = false)
+    @OneToMany(mappedBy = "club", cascade = CascadeType.REMOVE)
+   // @JoinColumn(name = "training_id", nullable = false)
     private List <Training> trainings;
 
-    @OneToMany
-    @JoinColumn(name = "competition_id")
+    @OneToMany(mappedBy = "club", cascade = CascadeType.REMOVE)
+   // @JoinColumn(name = "competition_id")
     private List<Competition> competitions;
 
     public String getName() {
